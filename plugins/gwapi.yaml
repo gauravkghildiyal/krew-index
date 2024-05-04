@@ -1,0 +1,25 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: gwapi
+spec:
+  version: "v0.0.0-preview"
+  homepage: https://github.com/kubernetes-sigs/gateway-api/tree/main/gwctl
+  shortDescription: "Kubernetes Gateway API command-line companion."
+  description: "`kubectl gwapi` (also available as `gwctl`) provides commands to interact with, validate, and debug Gateway API configurations in your cluster."
+  platforms:
+  - uri: https://github.com/gauravkghildiyal/gateway-api/releases/download/v0.0.0/gwctl_1.1.0-rc1-SNAPSHOT-144031ae_linux_amd64.tar.gz
+    sha256: 74814ddd2499dfc93131753476d993d712173fae3914fbb1c877d411e094f7d1
+    # 'bin' specifies the path to the the plugin executable among extracted
+    # files. Krew takes care of creating a symbolic link called 'kubectl-gwapi'
+    # to the 'gwctl' binary.
+    bin: gwctl
+    # 'files' lists which files should be extracted out from the downloaded
+    # archive. We extract all files.
+    files:
+    - from: "*"
+      to: "."
+    selector:
+      matchLabels:
+        os: linux
+        arch: amd64
